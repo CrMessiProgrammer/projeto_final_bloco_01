@@ -3,8 +3,8 @@ import { colors } from "./src/util/Colors";
 
 export function main() {
 
-    let opcao, id, tipo, preco, valorIngresso, sorteio, mesAniversario: number;
-    let nome, email, beneficio: string;
+    let opcao, id, tipoPlano, precoPlano, mesAniversario, pontos: number;
+    let nome, email: string;
     let planoSocio = ['Socio Premium+++', 'Socio Plus++', 'Socio Basico+'];
 
     // Instanciar um Objeto da Classe SocioController
@@ -50,9 +50,11 @@ export function main() {
 
                 email = readlinesync.question("Digite o email do Socio: ");
 
-                tipo = readlinesync.keyInSelect(planoSocio, "", { cancel: false }) + 1;
+                pontos = readlinesync.questionInt("Digite os pontos do Socio: ");
 
-                switch (tipo) {
+                tipoPlano = readlinesync.keyInSelect(planoSocio, "", { cancel: false }) + 1;
+
+                switch (tipoPlano) {
                     case 1:
                         while (true) {
                             console.log(colors.fg.whitestrong, "\nMês do Seu Aniversário\n", colors.reset);
@@ -72,7 +74,7 @@ export function main() {
                         break;
                     case 3:
                         console.log(colors.fg.whitestrong, "\nCadastrar Sócio\n", colors.reset);
-                        console.log(colors.fg.whitestrong, `${nome} seu Plano: ${tipo} -> Valor: ${preco}`, colors.reset);
+                        console.log(colors.fg.whitestrong, `${nome} seu Plano: ${tipoPlano} -> Valor: ${precoPlano}`, colors.reset);
                         break;
                 }
 
@@ -109,8 +111,8 @@ export function main() {
             case 6:
                 console.log(colors.fg.whitestrong, "\nListar Todos os Planos\n", colors.reset);
 
-                console.log(colors.fg.whitestrong, "\n(Sócio Premium+++) -> Preço: R$ 100,00 -> Benefícios: Desconto no Ingresso + Sorteios + Brinde no Mês do Seu Aniversário", colors.reset);
-                console.log(colors.fg.whitestrong, "\n(Sócio Plus++) -> Preço: R$ 50,00 -> Benefícios: Desconto no Ingresso + Sorteios", colors.reset);
+                console.log(colors.fg.whitestrong, "\n(Sócio Premium+++) -> Preço: R$ 100,00 -> Benefícios: Desconto no Ingresso + Prêmios + Brinde no Mês do Seu Aniversário", colors.reset);
+                console.log(colors.fg.whitestrong, "\n(Sócio Plus++) -> Preço: R$ 50,00 -> Benefícios: Desconto no Ingresso + Prêmios", colors.reset);
                 console.log(colors.fg.whitestrong, "\n(Sócio Básico+) -> Preço: R$ 20,00 -> Benefícios: Desconto no Ingresso", colors.reset);
 
                 keyPress()
