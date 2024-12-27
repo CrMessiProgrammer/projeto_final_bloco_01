@@ -94,38 +94,40 @@ export abstract class Socio {
 
     public visualizar(): void {
 
-        let tipo: string;
+        let tipoP: string;
 
         switch (this._tipoPlano) {
             case 1:
-                tipo = "Sócio Premium+++";
+                tipoP = "Premium+++";
                 break;
             case 2:
-                tipo = "Sócio Plus++";
+                tipoP = "Plus++";
                 break;
             case 3:
-                tipo = "Sócio Básico+";
+                tipoP = "Básico+";
                 break;
             default:
-                tipo = "\nTipo Inválido";
+                tipoP = "\nTipo Inválido";
                 break;
         }
 
+        let tipoI: string;
+
         switch (this._tipoIngresso) {
             case 1:
-                tipo = "Camarote";
+                tipoI = "Camarote";
                 this.valorIngresso = + 1000;
                 break;
             case 2:
-                tipo = "Cadeira Cativa";
+                tipoI = "Cadeira Cativa";
                 this.valorIngresso = + 500;
                 break;
             case 3:
-                tipo = "Cadeira Comum";
+                tipoI = "Cadeira Comum";
                 this.valorIngresso = + 80;
                 break;
             default:
-                tipo = "\nTipo Inválido";
+                tipoI = "\nTipo Inválido";
                 break;
         }
 
@@ -133,10 +135,11 @@ export abstract class Socio {
         console.log("Dados do Sócio");
         console.log("*****************************************************");
         console.log(`ID: ${this._id}`);
+        console.log(`Sócio: ${tipoP}`);
         console.log(`Nome: ${this._nome}`);
         console.log(`Email: ${this._email}`);
-        console.log(`Tipo: ${tipo}`);
-        console.log(`Pontos Totais: ${this._pontos}`);
+        console.log(`Ingresso: ${tipoI}`);
+        console.log(`Pontos Acumulados: ${this._pontos}`);
     }
 
 }

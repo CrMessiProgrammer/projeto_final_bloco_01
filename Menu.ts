@@ -7,22 +7,23 @@ import { SocioBasico } from './src/model/SocioBasico';
 
 export function main() {
 
-    let opcao, id, tipoPlano, tipoIngresso, precoPlano, valorIngresso, mesAniversario, premios, pontos: number;
+    let opcao, id, tipoPlano, tipoIngresso, precoPlano, valorIngresso, mes, pontos: number;
     let nome, email: string;
+    let sorteios, mesAniversario: boolean;
     let planoSocio = ['Socio Premium+++', 'Socio Plus++', 'Socio Basico+'];
 
     // Instanciar um Objeto da Classe SocioController
     const socioController = new SocioController();
 
     // Objetos de Teste
-    socioController.cadastrar(new SocioPremium(socioController.gerarId(), "Carlos", "carlos@gmail.com", 1, 1, 100, 100, 100, 2, 10));
-    socioController.cadastrar(new SocioPlus(socioController.gerarId(), "Marcelo", "marcelo@gmail.com", 2, 2, 10, 10, 10, 3));
-    socioController.cadastrar(new SocioBasico(socioController.gerarId(), "Marilene", "marilene@gmail.com", 3, 3, 1, 1, 1));
+    socioController.cadastrar(new SocioPremium(socioController.gerarId(), "Carlos", "carlos@gmail.com", 1, 1, 100, 100, 100, true, true));
+    socioController.cadastrar(new SocioPlus(socioController.gerarId(), "Marcelo", "marcelo@gmail.com", 2, 2, 10, 10, 50, true));
+    socioController.cadastrar(new SocioBasico(socioController.gerarId(), "Marilene", "marilene@gmail.com", 3, 3, 1, 1, 0, 2, 30));
 
     while (true) {
 
         console.log("                                                       ");
-        console.log(colors.bg.whitebright, colors.fg.bluestrong, "***************************************************  ");
+        console.log(colors.bg.redbright, colors.fg.blackstrong, "***************************************************  ");
         console.log("                                                       ");
         console.log("                    SÓCIO TORCEDOR                     ");
         console.log("                Seu Time Sempre + Forte!               ");
@@ -44,7 +45,7 @@ export function main() {
         opcao = readlinesync.questionInt("");
 
         if (opcao == 0) {
-            console.log(colors.fg.yellowstrong, "\n-> Seja Sócio Torcedor - Seu Time Sempre + Forte!\n");
+            console.log(colors.fg.bluestrong, "\n-> Seja Sócio Torcedor - Seu Time Sempre + Forte!\n");
             sobre();
             console.log(colors.reset, "");
             process.exit(0);
@@ -66,9 +67,9 @@ export function main() {
                     case 1:
                         while (true) {
                             console.log(colors.fg.whitestrong, "\nMês do Seu Aniversário\n", colors.reset);
-                            mesAniversario = readlinesync.questionInt("Digite o Mes do Seu Aniversario para o Recebimento dos Brindes: ");
-                            if (mesAniversario >= 1 && mesAniversario <= 12) {
-                                socioController.cadastrar(new SocioPremium(socioController.gerarId(), nome, email, tipoPlano, mesAniversario, mesAniversario, mesAniversario, mesAniversario, mesAniversario, mesAniversario));
+                            mes = readlinesync.questionInt("Digite o Mes do Seu Aniversario para o Recebimento dos Brindes: ");
+                            if (mes >= 1 && mes <= 12) {
+                                socioController.cadastrar(new SocioPremium(socioController.gerarId(), nome, email, tipoPlano, mes, mes, mes, mes, true, true));
                                 break;
                             } else {
                                 console.log(colors.fg.redstrong, "\nMês Inválido! Digite novamente...", colors.reset);
@@ -78,21 +79,21 @@ export function main() {
                         break;
                     case 2:
                         console.log(colors.fg.whitestrong, "\nCadastrar Sócio\n", colors.reset);
-                        socioController.cadastrar(new SocioPlus(socioController.gerarId(), nome, email, tipoPlano, pontos, pontos, pontos, pontos, pontos));
+                        socioController.cadastrar(new SocioPlus(socioController.gerarId(), nome, email, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano, true));
                         break;
                     case 3:
                         console.log(colors.fg.whitestrong, "\nCadastrar Sócio\n", colors.reset);
-                        socioController.cadastrar(new SocioBasico(socioController.gerarId(), nome, email, tipoPlano, pontos, pontos, pontos, pontos));
+                        socioController.cadastrar(new SocioBasico(socioController.gerarId(), nome, email, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano));
                         break;
                 }
 
                 keyPress()
                 break;
             case 2:
-                console.log(colors.fg.whitestrong, "\nListar todos os Sócios Ativos\n", colors.reset);
-
+                console.log("\nListar todos os Sócios Ativos\n");
+                
                 socioController.listarTodosSociosAtivos();
-
+                
                 keyPress()
                 break;
             case 3:
@@ -115,23 +116,25 @@ export function main() {
 
                     nome = readlinesync.question("Digite o novo Nome: ");
 
+                    email = readlinesync.question("Digite o novo Email: ");
+
                     tipoPlano = socio.tipoPlano;
 
                     precoPlano = readlinesync.questionFloat("Digite o novo preco: ");
 
                     switch (tipoPlano) {
                         case 1:
-                            mesAniversario = readlinesync.questionInt("Digite o novo mes: ");
+                            mes = readlinesync.questionInt("Digite o novo mes: ");
 
-                            socioController.atualizar(new SocioPremium(id, nome, nome, tipoPlano, precoPlano, precoPlano, precoPlano, precoPlano, precoPlano, mesAniversario));
+                            socioController.atualizar(new SocioPremium(id, nome, nome, tipoPlano, precoPlano, precoPlano, precoPlano, precoPlano, true, true));
                             break;
                         case 2:
-                            premios = readlinesync.question("Digite o novo: ");
+                            sorteios = readlinesync.question("Digite o novo: ");
 
-                            socioController.atualizar(new SocioPlus(id, nome, nome, tipoPlano, tipoPlano, precoPlano, tipoPlano, tipoPlano, precoPlano));
+                           socioController.atualizar(new SocioPlus(id, nome, email, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano, true));
                             break;
                         case 3:
-                            socioController.atualizar(new SocioBasico(id, nome, nome, tipoPlano, tipoPlano, precoPlano, tipoPlano, tipoPlano));
+                            socioController.atualizar(new SocioBasico(id, nome, email, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano, tipoPlano));
                             break;
                     }
                 } else
@@ -168,7 +171,7 @@ export function main() {
 
 /* Função com os dados da pessoa desenvolvedora */
 function sobre(): void {
-    console.log(colors.bg.yellowbright, colors.fg.black, "                                                     ");
+    console.log(colors.bg.black, colors.fg.yellowstrong, "                                                     ");
     console.log("  ***************************************************  ");
     console.log("   Projeto Desenvolvido por:                           ");
     console.log("   Carlos Henrique Nunes - teste@gmail.com             ");

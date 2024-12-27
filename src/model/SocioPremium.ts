@@ -1,13 +1,14 @@
+import { colors } from "../util/Colors";
 import { Socio } from "./Socio";
 
 export class SocioPremium extends Socio {
 
-    private _premios: number;
-    private _brindeMesAniversario: number;
+    private _sorteios: boolean = true;
+    private _brindeMesAniversario: boolean = true;
 
-	constructor(id: number, nome: string, email: string, tipoPlano: number, tipoIngresso: number, precoPlano: number, valorIngresso: number, pontos: number, premios: number, brindeMesAniversario: number) {
+	constructor(id: number, nome: string, email: string, tipoPlano: number, tipoIngresso: number, precoPlano: number, valorIngresso: number, pontos: number, sorteios: boolean, brindeMesAniversario: boolean) {
         super(id, nome, email, tipoPlano, tipoIngresso, precoPlano, valorIngresso, pontos);
-		this._premios = premios;
+		this._sorteios = sorteios;
         this._brindeMesAniversario = brindeMesAniversario;
         precoPlano = 80;
 	}
@@ -21,8 +22,8 @@ export class SocioPremium extends Socio {
 
     public visualizar() {
         super.visualizar();
-        console.log(`Premio: ${this._premios}`);
-        console.log(`Brinde: ${this._brindeMesAniversario}`);
+        console.log(`Sorteios:`, colors.fg.green, ` ${this._sorteios}`, colors.reset);
+        console.log(`Brindes:`, colors.fg.green, ` ${this._brindeMesAniversario}`, colors.reset);
     }
 
 }
